@@ -68,7 +68,7 @@ ${if_existing /proc/net/route wlp2s0}
 
 	${offset 34}SSID${alignr}${wireless_essid wlp2s0}
 	${offset 34}Private${alignr}${addr wlp2s0}
-	${offset 34}Public${alignr}89.140.95.106
+	${offset 34}Public${alignr}${exec wget http://ipinfo.io/ip -qO -}
 	${offset 34}Mac${alignr}${exec ip a | grep link/ether | tail -1 | cut -f 6 -d ' '}
 
 	${offset 34}${voffset -14}${downspeedgraph wlp2s0 30,160}
