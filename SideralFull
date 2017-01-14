@@ -65,8 +65,9 @@ TEXT
 ${color1}TIME${color0}${offset 12}${time %H:%M}${offset 18}${time %d/%m/%y}
 
 ${color1}BAT${color0}${offset 19}${battery_bar 10,100 BAT1}  ${battery_percent BAT1}%
-${color1}CPU${color0}${offset 18}${cpubar 10,100}  ${cpu cpu0}%
+${color1}CPU${color0}${offset 18}${cpubar 10,100}  ${cpu}%
 ${color1}RAM${color0}${offset 15}${membar 10,100}  ${memperc}%
+${color1}SWAP${color0}${offset 9}${swapbar 10,100}  ${swapperc}%
 ${color1}HDD${color0}${offset 15}${fs_bar 10,100 /home}  ${fs_used_perc}%
 
 ${color1}NET${color0}
