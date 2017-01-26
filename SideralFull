@@ -68,7 +68,7 @@ ${color1}RAM${color}${offset 15}${membar 3,50}  ${memperc}%
 ${color1}Root${color}${offset 18}${fs_bar 3,50 /}  ${fs_used_perc /}%
 ${color1}Home${color}${offset 11}${fs_bar 3,50 /home}  ${fs_used_perc /home}%
 
-${color1}Red${color0}
+${color1}Net${color0}
 ${if_existing /proc/net/route wlp2s0}
 	${offset 34}${voffset -30}Connected${offset 48}Wifi${alignr}${color}${wireless_link_qual_perc wlp2s0}%${color0}
 
