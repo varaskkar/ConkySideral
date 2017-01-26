@@ -27,10 +27,10 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 #own_window_argb_visual yes
 #own_window_argb_value 0
 
-alignment top_right
-gap_x 15
-gap_y 0
-minimum_size 210 800
+alignment top_left
+gap_x 30
+gap_y -30
+minimum_size 80 80
 
 
 default_bar_size 60 8
@@ -38,7 +38,7 @@ default_bar_size 60 8
 ################## = Graphics settings = ###################
 ############################################################
 color0 white
-color1 FFA300
+color1 99CCFF
 
 xftalpha 0.1
 own_window_argb_visual yes
@@ -46,9 +46,9 @@ own_window_colour 000000
 own_window_argb_value 0
 
 border_width 1
-default_color white
+default_color BDB5A1
 default_outline_color white
-default_shade_color white
+default_shade_color 1d1d1d
 draw_borders no
 draw_graph_borders yes
 draw_outline no
@@ -61,11 +61,10 @@ use_spacer none
 #################### = BEGIN HERE = ########################
 ############################################################
 TEXT
+${font Dinreg:style=Bold:size=9}
+${color1}BAT${color}${offset 19}${battery_bar 3,50 BAT1}  ${battery_percent BAT1}%
+${color1}CPU${color}${offset 18}${cpubar 3,50}  ${cpu}%
+${color1}RAM${color}${offset 15}${membar 3,50}  ${memperc}%
+${color1}Root${color}${offset 18}${fs_bar 3,50 /}  ${fs_used_perc /}%
+${color1}Home${color}${offset 11}${fs_bar 3,50 /home}  ${fs_used_perc /home}%
 
-${color1}TIME${color0}${offset 12}${time %H:%M}${offset 18}${time %d/%m/%y}
-
-${color1}BAT${color0}${offset 19}${battery_bar 10,100 BAT1}  ${battery_percent BAT1}%
-${color1}CPU${color0}${offset 18}${cpubar 10,100}  ${cpu}%
-${color1}RAM${color0}${offset 15}${membar 10,100}  ${memperc}%
-${color1}SWAP${color0}${offset 9}${swapbar 10,100}  ${swapperc}%
-${color1}HDD${color0}${offset 15}${fs_bar 10,100 /home}  ${fs_used_perc}%

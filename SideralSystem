@@ -27,10 +27,10 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 #own_window_argb_visual yes
 #own_window_argb_value 0
 
-alignment top_right
-gap_x 15
-gap_y 0
-minimum_size 210 800
+alignment top_left
+gap_x 30
+gap_y -30
+minimum_size 210 120
 
 
 default_bar_size 60 8
@@ -38,7 +38,7 @@ default_bar_size 60 8
 ################## = Graphics settings = ###################
 ############################################################
 color0 white
-color1 FFA300
+color1 99CCFF
 
 xftalpha 0.1
 own_window_argb_visual yes
@@ -46,9 +46,9 @@ own_window_colour 000000
 own_window_argb_value 0
 
 border_width 1
-default_color white
+default_color BDB5A1
 default_outline_color white
-default_shade_color white
+default_shade_color 1d1d1d
 draw_borders no
 draw_graph_borders yes
 draw_outline no
@@ -61,20 +61,24 @@ use_spacer none
 #################### = BEGIN HERE = ########################
 ############################################################
 TEXT
+${font Dinreg:style=Bold:size=9}
 
-${alignc}${color0}${nodename}${color0}
+${alignc}${color0}${nodename}
 
 ${voffset -15}${hr 1}
+${voffset -10}
+${color1}OS ${color}${alignr}${exec lsb_release -a | grep Description | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'} ${exec lsb_release -a | grep Release | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'} ${exec lsb_release -a | grep Codename | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'}
+${color1}Kernel ${color}${alignr}${sysname} ${kernel}
+${color1}Uptime ${color}${alignr}${uptime_short}
+${color1}Packages ${color}${alignr}${exec pacman -Q | wc -l}
+${color1}Shell ${color}${alignr}${exec echo $SHELL | cut -f 3 -d /} ${exec echo $BASH_VERSION | cut -f 1 -d '('}
+${color1}Resolution ${color}${alignr}${exec xrandr | grep current | cut -f 2 -d , | tr -d 'current '}
+${color1}DE ${color}${alignr}${exec plasmashell -v}
+${color1}WM ${color}${alignr}${exec xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep _NET_WM_NAME | cut -f 2 -d = | tr -d '"' | tr -d '[:space:]'}
+${color1}CPU ${color}${alignr}${exec cat /proc/cpuinfo | grep 'model name' | cut -f 2 -d : | head -1 | cut -f 2,3,12 -d ' ' | tr -d '(R)'}
+${color1}RAM ${color}${alignr}${exec TEST=$(free -m | grep Mem | cut -f 12 -d ' ') && echo "scale=1; $TEST/1000" | bc}GiB
+${color1}SWAP ${color}${alignr}${swapmax}
 
-${voffset -10}${color1}OS ${color0}${alignr}${exec lsb_release -a | grep Description | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'} ${exec lsb_release -a | grep Release | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'} ${exec lsb_release -a | grep Codename | cut -f 2 -d : | cut -f 1 -d \ | tr -d '[:space:]'}
-${color1}Kernel ${color0}${alignr}${sysname} ${kernel}
-${color1}Uptime ${color0}${alignr}${uptime_short}
-${color1}Packages ${color0}${alignr}${exec pacman -Q | wc -l}
-${color1}Shell ${color0}${alignr}${exec echo $SHELL | cut -f 3 -d /} ${exec echo $BASH_VERSION | cut -f 1 -d '('}
-${color1}Resolution ${color0}${alignr}${exec xrandr | grep current | cut -f 2 -d , | tr -d 'current '}
-${color1}DE ${color0}${alignr}${exec echo $XDG_CURRENT_DESKTOP} ${exec echo $DESKTOP_SESSION | cut -f 5 -d /}
-${color1}WM ${color0}${alignr}${exec xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep _NET_WM_NAME | cut -f 2 -d = | tr -d '"' | tr -d '[:space:]'}
-${color1}CPU ${color0}${alignr}${exec cat /proc/cpuinfo | grep 'model name' | cut -f 2 -d : | head -1 | cut -f 2,3,12 -d ' ' | tr -d '(R)'}
-${color1}RAM ${color0}${alignr}${exec TEST=$(free -m | grep Mem | cut -f 12 -d ' ') && echo "scale=1; $TEST/1000" | bc}GiB
-${color1}SWAP ${color0}${alignr}${swapmax}
+
+
 
