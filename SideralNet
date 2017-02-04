@@ -1,111 +1,102 @@
-#################### = Conky Settings = ####################
-############################################################
-update_interval 0.75
-total_run_times 0
-net_avg_samples 2
-cpu_avg_samples 2
+conky.config = {
+    background = true,
+    double_buffer = true,-- eliminates flicker
 
-imlib_cache_size 0
-double_buffer yes
-no_buffers yes
+    alignment = 'top_left',
+    gap_x = 25,
+    gap_y = -30,
 
-#################### = Text Settings = #####################
-############################################################
-use_xft yes
-xftfont Droid Sans:size=10
-#xftfont AvantGarde LT Medium:size=40
-override_utf8_locale yes
-text_buffer_size 2048
+    draw_borders = false,
+    border_width = 6,
+    border_inner_margin = 0,
+    --default_outline_color white
+	--default_shade_color white
+	--draw_graph_borders yes
+	--draw_outline no
+    draw_shades = false,
+    default_color = '#BDB5A1',
 
-############### = Window Specifications = ##################
-############################################################
-own_window yes
-own_window_type normal
-own_window_transparent yes
-own_window_colour 000000
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-#own_window_argb_visual yes
-#own_window_argb_value 0
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    --extra_newline no
 
-alignment top_left
-gap_x 30
-gap_y -30
-minimum_size 80 80
+    own_window = true,
+    own_window_type = 'normal',
+    --own_window_transparent yes
+    --own_window_colour 000000
+    own_window_argb_visual = true,
+    own_window_argb_value = 0, -- (transparent) 0..255 (opaque) is ignored if own_window_transparent yes !
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 
+    minimum_width = 80, minimum_height = 80,-- default is roughly 100px
+    --stippled_borders 0
+    update_interval = 0.75,-- in seconds
+    uppercase = false,-- default is no (?)
+    use_spacer = 'none',
 
-default_bar_size 60 8
+    show_graph_scale = false,-- shows scale in upper left corner of graphs, if no custom scale specified
+    show_graph_range = false,-- shows e.g. "2m" for the network graph's horizontal axis
 
-################## = Graphics settings = ###################
-############################################################
-color0 white
-color1 99CCFF
+    use_xft = true,-- antialiased fonts
+    xftalpha = 0.1,
+    font = 'Droid Sans:size=8',
 
-xftalpha 0.1
-own_window_argb_visual yes
-own_window_colour 000000
-own_window_argb_value 0
+    color0 = 'white',
+	color1 = '#99CCFF',
+	color2 = '#36511E',
+};
 
-border_width 1
-default_color BDB5A1
-default_outline_color white
-default_shade_color 1d1d1d
-draw_borders no
-draw_graph_borders yes
-draw_outline no
-draw_shades no
+conky.text = [[
+	${font Dinreg:style=Bold:size=9}
+	${color1}Net${color0}
+	${if_existing /proc/net/route wlp2s0}
+		${offset 34}${voffset -30}Connected${offset 48}Wifi${alignr}${color}${wireless_link_qual_perc wlp2s0}%${color0}
 
-uppercase no
-use_spacer none
+		${offset 34}SSID${alignr}${color}${wireless_essid wlp2s0}${color0}
+		${offset 34}Private${alignr}${color}${addr wlp2s0}${color0}
+		${offset 34}Public${alignr}${color}${exec wget http://ipinfo.io/ip -qO -}${color0}
+		${offset 34}Mac${alignr}${color}${exec ip a | grep link/ether | tail -1 | cut -f 6 -d ' '}
 
-############################################################
-#################### = BEGIN HERE = ########################
-############################################################
-TEXT
-${font Dinreg:style=Bold:size=9}
-${color1}Net${color0}
-${if_existing /proc/net/route wlp2s0}
-	${offset 34}${voffset -30}Connected${offset 48}Wifi${alignr}${color}${wireless_link_qual_perc wlp2s0}%${color0}
+		${offset 34}${voffset -14}${downspeedgraph wlp2s0 20,160}
+		${offset 43} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${upspeed wlp2s0}
+		${offset 43} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${downspeed wlp2s0}
+		${voffset -46}
+		${offset 120} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${totalup wlp2s0}
+		${offset 120} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${totaldown wlp2s0}
 
-	${offset 34}SSID${alignr}${color}${wireless_essid wlp2s0}${color0}
-	${offset 34}Private${alignr}${color}${addr wlp2s0}${color0}
-	${offset 34}Public${alignr}${color}${exec wget http://ipinfo.io/ip -qO -}${color0}
-	${offset 34}Mac${alignr}${color}${exec ip a | grep link/ether | tail -1 | cut -f 6 -d ' '}
+	${else}${if_existing /proc/net/route enp0s25}
+		${offset 34}${voffset -30}Connected${alignr}${color}Cable${color0}
 
-	${offset 34}${voffset -14}${downspeedgraph wlp2s0 20,160}
-	${offset 43} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${upspeed wlp2s0}
-	${offset 43} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${downspeed wlp2s0}
-	${voffset -46}
-	${offset 120} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${totalup wlp2s0}
-	${offset 120} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${totaldown wlp2s0}
+		${offset 34}Interfaz${alignr}${color}enp0s25${color0}
+		${offset 34}Private${alignr}${color}${addr enp0s25}${color0}
+		${offset 34}Public${alignr}${color}${exec wget http://ipinfo.io/ip -qO -}${color0}
+		${offset 34}Mac${alignr}${color}${exec ip a | grep link/ether | head -1 | cut -f 6 -d ' '}
 
-${else}${if_existing /proc/net/route enp0s25}
-	${offset 34}${voffset -30}Connected${alignr}${color}Wire${color0}
+		${offset 34}${voffset -14}${downspeedgraph enp0s25 20,160}
+		${offset 43} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${upspeed enp0s25}
+		${offset 43} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${downspeed enp0s25}
+		${voffset -46}
+		${offset 120} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${totalup enp0s25}
+		${offset 120} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${totaldown enp0s25}
+	${else}
+		${offset 34}${voffset -30}${color}No Connected
 
-	${offset 34}Interface${alignr}${color}enp0s25${color0}
-	${offset 34}Private${alignr}${color}${addr enp0s25}${color0}
-	${offset 34}Public${alignr}${color}${exec wget http://ipinfo.io/ip -qO -}${color0}
-	${offset 34}Mac${alignr}${color}${exec ip a | grep link/ether | head -1 | cut -f 6 -d ' '}
+		${offset 34}- - -
+		${offset 34}- - -
+		${offset 34}- - -
+		${offset 34}- - -
 
-	${offset 34}${voffset -14}${downspeedgraph enp0s25 20,160}
-	${offset 43} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${upspeed enp0s25}
-	${offset 43} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${downspeed enp0s25}
-	${voffset -46}
-	${offset 120} ${font PizzaDude Bullets:size=10}N${font}  ${font Dinreg:size=9}${totalup enp0s25}
-	${offset 120} ${font PizzaDude Bullets:size=10}T${font}  ${font Dinreg:size=9}${totaldown enp0s25}
-${else}
-	${offset 34}${voffset -30}${color}No Connected
+		${offset 34}${voffset -14}${downspeedgraph wlp2s0 20,160}
+		${offset 43} ${font PizzaDude Bullets:size=10}N${font}  - - -
+		${offset 43} ${font PizzaDude Bullets:size=10}T${font}  - - -
+		${voffset -46}
+		${offset 120} ${font PizzaDude Bullets:size=10}N${font}  - - -
+		${offset 120} ${font PizzaDude Bullets:size=10}T${font}  - - -
+	${endif}
+	${endif}
+]];
 
-	${offset 34}- - -
-	${offset 34}- - -
-	${offset 34}- - -
-	${offset 34}- - -
-
-	${offset 34}${voffset -14}${downspeedgraph wlp2s0 20,160}
-	${offset 43} ${font PizzaDude Bullets:size=10}N${font}  - - -
-	${offset 43} ${font PizzaDude Bullets:size=10}T${font}  - - -
-	${voffset -46}
-	${offset 120} ${font PizzaDude Bullets:size=10}N${font}  - - -
-	${offset 120} ${font PizzaDude Bullets:size=10}T${font}  - - -
-${endif}
-${endif}
 
