@@ -16,6 +16,7 @@ ConkySideral
 ### Complete set
 ![avatar](http://i.imgur.com/IPM0XDI.png)
 
-### Installation
+Installation
+-------------
 1. Copy the folder to ~/.conky/
 2. Open Conky Manager and select the widget you prefer
