@@ -1,21 +1,21 @@
-###Installation
+### Installation
 Copy the folder to ~/.conky/ and execute the widget you prefer
 
 `conky -c "$HOME/.conky/ConkySideral/SideralFull"`
 
 **Fonts needed**: "Dinreg" and "PizzaDude Bullets"
 
-###Status
+### Status
 ![avatar](http://i.imgur.com/p60uUAC.png)
 
-###Network
+### Network
 ![avatar](http://i.imgur.com/s5uM9T5.jpg)
 
-###Processes
+### Processes
 ![avatar](http://i.imgur.com/b0Ppa4p.png)
 
-###System
+### System
 ![avatar](http://i.imgur.com/v6g0zI1.png)
 
-###Complete set
+### Complete set
 ![avatar](http://i.imgur.com/IPM0XDI.png)
