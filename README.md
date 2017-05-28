@@ -1,9 +1,11 @@
-### Installation
-Copy the folder to ~/.conky/ and execute the widget you prefer
+# Installation
+Copy the folder to ~/.conky/ and execute the widget you prefer:
 
 `conky -c "$HOME/.conky/ConkySideral/SideralFull"`
 
 **Fonts needed**: "Dinreg" and "PizzaDude Bullets"
+
+# Preview
 
 ### Status
 ![avatar](http://i.imgur.com/p60uUAC.png)
