@@ -1,7 +1,7 @@
 # Installation
 Copy the folder to ~/.conky/ and execute the widget you prefer:
 
-`conky -c "$HOME/.conky/ConkySideral/SideralFull"`
+`conky -c "$HOME/.conky/ConkySideral/SideralComplete"`
 
 **Fonts needed**: "Dinreg" and "PizzaDude Bullets"
 
